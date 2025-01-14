@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raider Supply Co.</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #000000, #555555);
+            color: #ffffff; /* Set default text color to white for better visibility */
+        }
+        header {
+            background: #222; /* Darker header background */
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .preorder {
+            background: #000; /* Black background for the preorder box */
+            color: #fff; /* White text color */
+            padding: 10px;
+            margin: 10px 0; /* Margin to separate from the nav */
+            font-size: 1.5em; /* Increase font size */
+            font-weight: bold; /* Bold text */
+        }
+        .hero {
+            background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .hero h1 {
+            font-size: 3em;
+        }
+        .products {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .product {
+            background: #333; /* Dark background for product cards */
+            border: 1px solid #444; /* Slightly lighter border */
+            border-radius: 5px;
+            width: 30%;
+            margin: 10px;
+            padding: 15px;
+            text-align: center;
+            color: #fff; /* White text for product details */
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #222; /* Darker footer background */
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Raider Supply Co.</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="create-account.html" style="background: #000; color: #fff; padding: 10px; margin: 0 5px; border-radius: 5px;">Create Account</a>
+        <a href="sign-in.html" style="background: #000; color: #fff; padding: 10px; margin: 0 5px; border-radius: 5px;">Sign In</a>
+    </nav>
+    <div class="preorder">Pre-order now!</div> <!-- Pre-order announcement -->
+</header>
+
+<div class="hero">
+    <h1>Discover Your Style</h1>
+</div>
+
+<section id="products">
+    <h2 style="text-align:center;">Our Products</h2>
+    <div class="products">
+        <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Stylish Jacket">
+            <h3>Stylish Jacket</h3>
+            <p>$99.99</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Casual T-Shirt">
+            <h3>Casual T-Shirt</h3>
+            <p>$29.99</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Comfortable Jeans">
+            <h3>Comfortable Jeans</h3>
+            <p>$49.99</p>
+            <button>Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <h2 style="text-align:center;">About Us</h2>
+    <p style="text-align:center; width: 60%; margin: auto;">
+        Raider Supply Co. is dedicated to providing high-quality clothing that combines style and comfort. Our mission is to empower individuals through fashion, offering a wide range of products that cater to all tastes and preferences.
+    </p>
+</section>
+
+<footer>
+    <p>&copy; 2023 Raider Supply Co. All rights reserved.</p>
+    <p>Follow us on social media: 
+        <a href="#" style="color: #fff;">Facebook</a> | 
+        <a href="#" style="color: #fff;">Instagram</a> | 
+        <a href="#" style="color: #fff;">Twitter</a>
+    </p>
+</footer>
+
+</body>
+</html>

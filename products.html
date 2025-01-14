@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Raider Supply Co.</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            background-color: #000; /* Full black background */
+            color: #ffffff; /* White text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: #222; /* Darker header background */
+            color: #fff;
+            padding: 10px 0;
+            position: relative;
+        }
+        .nav-menu {
+            position: absolute; /* Position the menu absolutely */
+            top: 10px; /* Position it at the top */
+            right: 20px; /* Position it on the right */
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .cart-count {
+            background-color: #007BFF; /* Blue background for cart count */
+            color: #fff;
+            border-radius: 50%; /* Circular shape */
+            padding: 5px 10px; /* Padding for size */
+            position: absolute; /* Position it above the cart */
+            top: -10px; /* Adjust position */
+            right: 40px; /* Align with the button */
+            font-weight: bold;
+            font-size: 16px; /* Font size */
+        }
+        .products {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .product {
+            background: #333; /* Dark background for product cards */
+            border: 1px solid #444; /* Slightly lighter border */
+            border-radius: 5px;
+            width: 30%;
+            margin: 10px;
+            padding: 15px;
+            text-align: center;
+            color: #fff; /* White text for product details */
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #222; /* Darker footer background */
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        /* Cart Modal Styles */
+        .cart-modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+            padding-top: 60px; /* Place the modal content a bit down */
+        }
+        .cart-content {
+            background-color: #333;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #444;
+            border-radius: 10px;
+            width: 80%; /* Modal width */
+            color: #fff;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .cart-item img {
+            width: 50px; /* Set a fixed width for images in the cart */
+            height: auto;
+            margin-right: 10px; /* Space between image and text */
+        }
+        button {
+            background-color: #000; /* Black background for buttons */
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px; /* Rounded buttons */
+            cursor: pointer;
+            margin: 5px; /* Space between buttons */
+        }
+        button:hover {
+            background-color: #444; /* Darker shade on hover */
+        }
+        .checkout-button {
+            background-color: #007BFF; /* Blue background for checkout button */
+            color: #fff;
+            border-radius: 25px; /* Rounded checkout button */
+            padding: 15px 30px; /* More padding for the checkout button */
+            font-size: 18px; /* Larger font size */
+            margin-top: 20px; /* Space above the button */
+        }
+        .remove-item {
+            margin-left: auto; /* Align the remove button to the right */
+            background: #000; /* Black background for remove button */
+            color: #fff; /* White text color */
+            border: none;
+            cursor: pointer;
+            font-size: 20px; /* Font size for the button */
+        }
+        .remove-item:hover {
+            color: #ff0000; /* Change color on hover */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Raider Supply Co.</h1>
+    <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="create-account.html">Create Account</a>
+        <a href="sign-in.html">Sign In</a>
+        <a href="about.html">About Us</a>
+        <button onclick="openCart()">View Cart <img src="https://img.icons8.com/ios-filled/20/ffffff/shopping-cart.png" class="cart-icon" alt="Cart Icon"/></button>
+        <span class="cart-count" id="cartCount">0</span> <!-- Cart item count -->
+    </div>
+</header>
+
+<section id="products">
+    <h2 style="text-align:center;">Our Products</h2>
+    <div class="products">
+        <!-- Product 1 -->
+        <div class="product">
+            <img src="https://source.unsplash.com/250x250/?jacket" alt="Stylish Jacket">
+            <h3>Stylish Jacket</h3>
+            <p>$99.99</p>
+            <button onclick="addToCart('Stylish Jacket', 99.99, 'https://source.unsplash.com/250x250/?jacket')">Add to Cart</button>
+        </div>
+        <!-- Product 2 -->
+        <div class="product">
+            <img src="https://source.unsplash.com/250x250/?tshirt" alt="Casual T-Shirt">
+            <h3>Casual T-Shirt</h3>
+            <p>$29.99</p>
+            <button onclick="addToCart('Casual T-Shirt', 29.99, 'https://source.unsplash.com/250x250/?tshirt')">Add to Cart</button>
+        </div>
+        <!-- Product 3 -->
+        <div class="product">
+            <img src="https://source.unsplash.com/250x250/?jeans" alt="Comfortable Jeans">
+            <h3>Comfortable Jeans</h3>
+            <p>$49.99</p>
+            <button onclick="addToCart('Comfortable Jeans', 49.99, 'https://source.unsplash.com/250x250/?jeans')">Add to Cart</button>
+        </div>
+        <!-- Product 4 -->
+        <div class="product">
+            <img src="https://source.unsplash.com/250x250/?hoodie" alt="Classic Hoodie">
+            <h3>Classic Hoodie</h3>
+            <p>$59.99</p>
+            <button onclick="addToCart('Classic Hoodie', 59.99, 'https://source.unsplash.com/250x250/?hoodie')">Add to Cart</button>
+        </div>
+        <!-- Product 5 -->
+        <div class="product">
+            <img src="https://source.unsplash.com/250x250/?sneakers" alt="Sporty Sneakers">
+            <h3>Sporty Sneakers</h3>
+            <p>$89.99</p>
+            <button onclick="addToCart('Sporty Sneakers', 89.99, 'https://source.unsplash.com/250x250/?sneakers')">Add to Cart</button>
+        </div>
+        <!-- Product 6 -->
+        <div class="product">
+            <img src="https://source.unsplash.com/250x250/?dress" alt="Elegant Dress">
+            <h3>Elegant Dress</h3>
+            <p>$79.99</p>
+            <button onclick="addToCart('Elegant Dress', 79.99, 'https://source.unsplash.com/250x250/?dress')">Add to Cart</button>
+        </div>
+        <!-- Product 7 -->
+        <div class="product">
+            <img src="https://source.unsplash.com/250x250/?cap" alt="Stylish Cap">
+            <h3>Stylish Cap</h3>
+            <p>$19.99</p>
+            <button onclick="addToCart('Stylish Cap', 19.99, 'https://source.unsplash.com/250x250/?cap')">Add to Cart</button>
+        </div>
+        <!-- Product 8 -->
+        <div class="product">
+            <img src="https://source.unsplash.com/250x250/?scarf" alt="Winter Scarf">
+            <h3>Winter Scarf</h3>
+            <p>$24.99</p>
+            <button onclick="addToCart('Winter Scarf', 24.99, 'https://source.unsplash.com/250x250/?scarf')">Add to Cart</button>
+        </div>
+        <!-- Product 9 -->
+        <div class="product">
+            <img src="https://source.unsplash.com/250x250/?belt" alt="Leather Belt">
+            <h3>Leather Belt</h3>
+            <p>$39.99</p>
+            <button onclick="addToCart('Leather Belt', 39.99, 'https://source.unsplash.com/250x250/?belt')">Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<div id="cartModal" class="cart-modal">
+    <div class="cart-content">
+        <span class="close" onclick="closeCart()">&times;</span>
+        <h2>Your Cart</h2>
+        <div id="cartItems"></div>
+        <button class="checkout-button" onclick="checkout()">Checkout - $0.00</button>
+        <button onclick="clearCart()">Clear Cart</button>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2023 Raider Supply Co. All rights reserved.</p>
+    <p>Follow us on social media: 
+        <a href="#" style="color: #fff;">Facebook</a> | 
+        <a href="#" style="color: #fff;">Instagram</a> | 
+        <a href="#" style="color: #fff;">Twitter</a>
+    </p>
+</footer>
+
+
+<script>
+    // Initialize cart from localStorage or as an empty array
+    let cart = JSON.parse(localStorage.getItem('cart')) || []; 
+
+    // Function to add items to the cart
+    function addToCart(productName, price, imageUrl) {
+        cart.push({ name: productName, price: price, image: imageUrl });
+        localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
+        updateCheckoutButton();
+        updateCartCount();
+    }
+
+    // Function to update the checkout button text
+    function updateCheckoutButton() {
+        const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+        const checkoutButton = document.querySelector(".checkout-button");
+        checkoutButton.textContent = `Checkout - $${totalPrice.toFixed(2)}`;
+    }
+
+    // Function to update the cart count display
+    function updateCartCount() {
+        const cartCountElement = document.getElementById("cartCount");
+        cartCountElement.textContent = cart.length; // Update count
+    }
+
+    // Function to open the cart modal
+    function openCart() {
+        const cartModal = document.getElementById("cartModal");
+        const cartItems = document.getElementById("cartItems");
+        
+        cartItems.innerHTML = ""; // Clear previous items
+        cart.forEach((item, index) => {
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "cart-item"; // Add class for styling
+            itemDiv.innerHTML = `<img src="${item.image}" alt="${item.name}"> ${item.name} - $${item.price.toFixed(2)} <button class="remove-item" onclick="removeFromCart(${index})">X</button>`;
+            cartItems.appendChild(itemDiv);
+        });
+
+        cartModal.style.display = "block"; // Show the modal
+        updateCheckoutButton(); // Update the checkout button
+    }
+
+    // Function to remove item from the cart
+    function removeFromCart(index) {
+        cart.splice(index, 1); // Remove item from cart array
+        localStorage.setItem('cart', JSON.stringify(cart)); // Update localStorage
+        openCart(); // Refresh the cart display
+        updateCartCount(); // Update the cart count
+    }
+
+    // Function to close the cart modal
+    function closeCart() {
+        document.getElementById("cartModal").style.display = "none"; // Hide the modal
+    }
+
+    // Function to clear the cart
+    function clearCart() {
+        cart = []; // Empty the cart
+        localStorage.removeItem('cart'); // Remove from localStorage
+        closeCart(); // Close the modal
+        alert("Your cart has been cleared.");
+        updateCheckoutButton(); // Update the checkout button
+        updateCartCount(); // Update the cart count
+    }
+
+    // Function to handle checkout
+    function checkout() {
+        if (cart.length === 0) {
+            alert("Your cart is empty!");
+        } else {
+            window.location.href = "checkout.html"; // Redirect to the checkout page
+        }
+    }
+
+    // Close the modal when the user clicks anywhere outside of it
+    window.onclick = function(event) {
+        const cartModal = document.getElementById("cartModal");
+        if (event.target === cartModal) {
+            closeCart();
+        }
+    };
+
+    // On page load, update the cart count and checkout button
+    window.onload = function() {
+        updateCartCount();
+        updateCheckoutButton();
+    };
+</script>
+
+
+
+<script>
+    let cart = []; // Array to hold cart items
+
+    // Function to add items to the cart
+    function addToCart(productName, price, imageUrl) {
+        cart.push({ name: productName, price: price, image: imageUrl });
+        updateCheckoutButton();
+        updateCartCount();
+    }
+
+    // Function to update the checkout button text
+    function updateCheckoutButton() {
+        const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+        const checkoutButton = document.querySelector(".checkout-button");
+        checkoutButton.textContent = `Checkout - $${totalPrice.toFixed(2)}`;
+    }
+
+    // Function to update the cart count display
+    function updateCartCount() {
+        const cartCountElement = document.getElementById("cartCount");
+        cartCountElement.textContent = cart.length; // Update count
+    }
+
+    // Function to open the cart modal
+    function openCart() {
+        const cartModal = document.getElementById("cartModal");
+        const cartItems = document.getElementById("cartItems");
+        
+        cartItems.innerHTML = ""; // Clear previous items
+        cart.forEach((item, index) => {
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "cart-item"; // Add class for styling
+            itemDiv.innerHTML = `<img src="${item.image}" alt="${item.name}"> ${item.name} - $${item.price.toFixed(2)} <button class="remove-item" onclick="removeFromCart(${index})">X</button>`;
+            cartItems.appendChild(itemDiv);
+        });
+
+        cartModal.style.display = "block"; // Show the modal
+        updateCheckoutButton(); // Update the checkout button
+    }
+
+    // Function to remove item from the cart
+    function removeFromCart(index) {
+        cart.splice(index, 1); // Remove item from cart array
+        openCart(); // Refresh the cart display
+        updateCartCount(); // Update the cart count
+    }
+
+    // Function to close the cart modal
+    function closeCart() {
+        document.getElementById("cartModal").style.display = "none"; // Hide the modal
+    }
+
+    // Function to clear the cart
+    function clearCart() {
+        cart = []; // Empty the cart
+        closeCart(); // Close the modal
+        alert("Your cart has been cleared.");
+        updateCheckoutButton(); // Update the checkout button
+        updateCartCount(); // Update the cart count
+    }
+
+    // Function to handle checkout (for demonstration purposes)
+    function checkout() {
+        if (cart.length === 0) {
+            alert("Your cart is empty!");
+        } else {
+            window.location.href = "checkout.html"; // Redirect to the checkout page
+        }
+    }
+
+    // Close the modal when the user clicks anywhere outside of it
+    window.onclick = function(event) {
+        const cartModal = document.getElementById("cartModal");
+        if (event.target === cartModal) {
+            closeCart();
+        }
+    };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Raider Supply Co.</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            background-color: #000; /* Full black background */
+            color: #ffffff; /* White text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: #222; /* Darker header background */
+            color: #fff;
+            padding: 10px 0;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .checkout-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .receipt {
+            background: #333; /* Dark background for receipt */
+            padding: 20px;
+            border-radius: 5px;
+            width: 45%; /* Width of the receipt section */
+            margin-right: 20px; /* Space between receipt and payment methods */
+            text-align: left; /* Left align text in receipt */
+        }
+        .payment-methods {
+            background: #333; /* Dark background for payment methods */
+            padding: 20px;
+            border-radius: 5px;
+            width: 45%; /* Width of the payment section */
+        }
+        .payment-methods h3 {
+            margin-top: 0; /* Remove top margin */
+        }
+        button {
+            background-color: #007BFF; /* Blue background for buttons */
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px; /* Rounded buttons */
+            cursor: pointer;
+            margin: 5px; /* Space between buttons */
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #222; /* Darker footer background */
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Raider Supply Co.</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="create-account.html">Create Account</a>
+        <a href="sign-in.html">Sign In</a>
+        <a href="about.html">About Us</a>
+    </nav>
+</header>
+
+<div class="checkout-container">
+    <div class="receipt">
+        <h2>Receipt</h2>
+        <div id="cartItems"></div>
+        <h3>Total: <span id="totalPrice">$0.00</span></h3>
+    </div>
+    <div class="payment-methods">
+        <h3>Payment Methods</h3>
+        <button onclick="alert('Paying with Credit Card')">Credit Card</button>
+        <button onclick="alert('Paying with PayPal')">PayPal</button>
+        <button onclick="alert('Paying with Bitcoin')">Bitcoin</button>
+        <button onclick="alert('Paying with Apple Pay')">Apple Pay</button>
+        <button onclick="alert('Paying with Google Pay')">Google Pay</button>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2023 Raider Supply Co. All rights reserved.</p>
+    <p>Follow us on social media: 
+        <a href="#" style="color: #fff;">Facebook</a> | 
+        <a href="#" style="color: #fff;">Instagram</a> | 
+        <a href="#" style="color: #fff;">Twitter</a>
+    </p>
+</footer>
+
+<script>
+    // Load cart from localStorage on page load
+    window.onload = function() {
+        const storedCart = JSON.parse(localStorage.getItem('cart'));
+        const cartItemsDiv = document.getElementById('cartItems');
+        const totalPriceSpan = document.getElementById('totalPrice');
+
+        if (storedCart && storedCart.length > 0) {
+            let totalPrice = 0;
+            storedCart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.innerHTML = `<img src="${item.image}" alt="${item.name}" style="width: 50px; height: auto; margin-right: 10px;"> ${item.name} - $${item.price.toFixed(2)}`;
+                cartItemsDiv.appendChild(itemDiv);
+                totalPrice += item.price; // Calculate total price
+            });
+            totalPriceSpan.textContent = `$${totalPrice.toFixed(2)}`; // Update total price
+        } else {
+            cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+        }
+    };
+</script>
+
+</body>
+</html>

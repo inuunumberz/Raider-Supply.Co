@@ -1,0 +1,125 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Solid black background */
+    color: #ffffff; /* Default text color */
+}
+
+header {
+    background: #222; /* Darker header background */
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+nav a.button {
+    background: #000; /* Black background for buttons */
+    color: #fff;
+    padding: 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+nav a.button:hover {
+    background: #444; /* Darker shade on hover */
+}
+
+.preorder {
+    background: #000; /* Black background for the preorder box */
+    color: #fff; /* White text color */
+    padding: 10px;
+    margin: 10px 0; /* Margin to separate from the nav */
+    font-size: 1.5em; /* Increase font size */
+    font-weight: bold; /* Bold text */
+}
+
+.hero {
+    background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero h1 {
+    font-size: 3em;
+}
+
+.products {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: #000; /* Ensure the products section is also black */
+}
+
+.product {
+    background: #333; /* Dark background for product cards */
+    border: 1px solid #444; /* Slightly lighter border */
+    border-radius: 5px;
+    width: 30%;
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+    color: #fff; /* White text for product details */
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #222; /* Darker footer background */
+    color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Form Styles */
+.form-container {
+    background: #444; /* Dark background for form container */
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px auto;
+    width: 300px;
+    text-align: center;
+}
+
+.form-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+.form-container button {
+    padding: 10px;
+    background: #333; /* Dark background for buttons */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background: #555; /* Darker shade on hover */
+}
