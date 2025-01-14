@@ -46,9 +46,14 @@
             justify-content: space-around;
             flex-wrap: wrap;
             padding: 20px;
+            background-image: url('Logo-removebg-preview.png'); /* Background image for products */
+            background-size: contain; /* Adjust size to fit */
+            background-repeat: no-repeat; /* Prevent repeating */
+            background-position: center; /* Center the background image */
+            border-radius: 10px; /* Optional: Add rounded corners */
         }
         .product {
-            background: #333; /* Dark background for product cards */
+            background: rgba(51, 51, 51, 0.9); /* Dark background for product cards with transparency */
             border: 1px solid #444; /* Slightly lighter border */
             border-radius: 5px;
             width: 30%;
@@ -249,8 +254,10 @@
     </p>
 </footer>
 
+
 <script>
-    let cart = []; // Array to hold cart items
+    // Initialize cart from localStorage or as an empty array
+    let cart = JSON.parse(localStorage.getItem('cart')) || []; 
 
     // Function to add items to the cart
     function addToCart(productName, price, imageUrl) {
@@ -313,7 +320,7 @@
         updateCartCount(); // Update the cart count
     }
 
-    // Function to handle checkout (for demonstration purposes)
+    // Function to handle checkout
     function checkout() {
         if (cart.length === 0) {
             alert("Your cart is empty!");
@@ -332,9 +339,89 @@
 
     // On page load, update the cart count and checkout button
     window.onload = function() {
-        cart = JSON.parse(localStorage.getItem('cart')) || []; // Load cart from localStorage
         updateCartCount();
         updateCheckoutButton();
+    };
+</script>
+
+
+
+<script>
+    let cart = []; // Array to hold cart items
+
+    // Function to add items to the cart
+    function addToCart(productName, price, imageUrl) {
+        cart.push({ name: productName, price: price, image: imageUrl });
+        updateCheckoutButton();
+        updateCartCount();
+    }
+
+    // Function to update the checkout button text
+    function updateCheckoutButton() {
+        const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+        const checkoutButton = document.querySelector(".checkout-button");
+        checkoutButton.textContent = `Checkout - $${totalPrice.toFixed(2)}`;
+    }
+
+    // Function to update the cart count display
+    function updateCartCount() {
+        const cartCountElement = document.getElementById("cartCount");
+        cartCountElement.textContent = cart.length; // Update count
+    }
+
+    // Function to open the cart modal
+    function openCart() {
+        const cartModal = document.getElementById("cartModal");
+        const cartItems = document.getElementById("cartItems");
+        
+        cartItems.innerHTML = ""; // Clear previous items
+        cart.forEach((item, index) => {
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "cart-item"; // Add class for styling
+            itemDiv.innerHTML = `<img src="${item.image}" alt="${item.name}"> ${item.name} - $${item.price.toFixed(2)} <button class="remove-item" onclick="removeFromCart(${index})">X</button>`;
+            cartItems.appendChild(itemDiv);
+        });
+
+        cartModal.style.display = "block"; // Show the modal
+        updateCheckoutButton(); // Update the checkout button
+    }
+
+    // Function to remove item from the cart
+    function removeFromCart(index) {
+        cart.splice(index, 1); // Remove item from cart array
+        openCart(); // Refresh the cart display
+        updateCartCount(); // Update the cart count
+    }
+
+    // Function to close the cart modal
+    function closeCart() {
+        document.getElementById("cartModal").style.display = "none"; // Hide the modal
+    }
+
+    // Function to clear the cart
+    function clearCart() {
+        cart = []; // Empty the cart
+        closeCart(); // Close the modal
+        alert("Your cart has been cleared.");
+        updateCheckoutButton(); // Update the checkout button
+        updateCartCount(); // Update the cart count
+    }
+
+    // Function to handle checkout (for demonstration purposes)
+    function checkout() {
+        if (cart.length === 0) {
+            alert("Your cart is empty!");
+        } else {
+            window.location.href = "checkout.html"; // Redirect to the checkout page
+        }
+    }
+
+    // Close the modal when the user clicks anywhere outside of it
+    window.onclick = function(event) {
+        const cartModal = document.getElementById("cartModal");
+        if (event.target === cartModal) {
+            closeCart();
+        }
     };
 </script>
 
